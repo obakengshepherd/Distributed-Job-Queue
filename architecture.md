@@ -152,13 +152,13 @@ main queue — they are entirely isolated.
 
 ---
 
-## Component Responsibilities Summary
+## Component Responsibilities Summary.
 
-| Component             | Responsibility                                              | Communicates Via         |
-|-----------------------|-------------------------------------------------------------|--------------------------|
-| Job Submission API    | Accept job submissions, return status, expose management    | HTTP                     |
-| PostgreSQL            | Job store, coordination via SKIP LOCKED, result persistence | TCP + row-level locking  |
-| RabbitMQ              | Worker wake-up signal on new job creation                   | AMQP                     |
-| Worker Pool           | Claim, execute, heartbeat, complete/fail jobs               | PostgreSQL + RabbitMQ    |
-| Worker Watchdog       | Detect stale workers, reclaim orphaned running jobs         | PostgreSQL (scheduled)   |
-| Dead Letter Queue     | Isolate permanently failing jobs for manual inspection      | PostgreSQL table         |
+| Component          | Responsibility                                              | Communicates Via        |
+| ------------------ | ----------------------------------------------------------- | ----------------------- |
+| Job Submission API | Accept job submissions, return status, expose management    | HTTP                    |
+| PostgreSQL         | Job store, coordination via SKIP LOCKED, result persistence | TCP + row-level locking |
+| RabbitMQ           | Worker wake-up signal on new job creation                   | AMQP                    |
+| Worker Pool        | Claim, execute, heartbeat, complete/fail jobs               | PostgreSQL + RabbitMQ   |
+| Worker Watchdog    | Detect stale workers, reclaim orphaned running jobs         | PostgreSQL (scheduled)  |
+| Dead Letter Queue  | Isolate permanently failing jobs for manual inspection      | PostgreSQL table        |
