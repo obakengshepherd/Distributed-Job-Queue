@@ -100,7 +100,7 @@ or permanently failed job for post-execution inspection.
 
 ---
 
-## Data Flow
+## Data Flow.
 
 ### Job Lifecycle — Happy Path
 
