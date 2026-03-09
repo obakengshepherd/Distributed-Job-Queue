@@ -46,9 +46,10 @@ behaved job cannot prevent other jobs from running.
 
 ---
 
-## Section 3 — Scope of This Implementation
+## Section 3 — Scope of This Implementation.
 
 **In scope:**
+
 - Job submission API with payload, type, priority, and optional scheduled execution time
 - Atomic job claiming using PostgreSQL `SELECT FOR UPDATE SKIP LOCKED`
 - Worker registration and heartbeat with stale worker detection
@@ -61,6 +62,7 @@ behaved job cannot prevent other jobs from running.
 - Priority queue support (higher priority jobs claimed before lower priority)
 
 **Out of scope:**
+
 - Cron-style recurring job scheduling
 - Job dependency graphs (job B starts only after job A completes)
 - Distributed tracing across job chains
