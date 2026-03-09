@@ -2,7 +2,7 @@
 
 ---
 
-## Section 1 — The Problem
+## Section 1 — The Problem.
 
 Not all work can or should happen in the context of an HTTP request. Sending an email,
 processing an uploaded video, generating a report, or running a data pipeline are all
