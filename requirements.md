@@ -43,7 +43,7 @@ or permanently failed job for post-execution inspection.
 
 ---
 
-## Non-Functional Requirements
+## Non-Functional Requirements.
 
 ### Availability
 
