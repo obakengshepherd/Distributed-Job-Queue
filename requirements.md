@@ -46,51 +46,57 @@ or permanently failed job for post-execution inspection.
 ## Non-Functional Requirements
 
 ### Availability
+
 - **NFR-01** — The Job Submission API shall maintain 99.9% uptime.
 - **NFR-02** — Worker pool availability is a function of instance count. At least one worker
   instance must be running at all times. Worker scaling is operator-managed.
 
 ### Latency
+
 - **NFR-03** — Job start delay (time from submission to start of execution by a worker) p95
   ≤ 5,000ms under normal load.
 - **NFR-04** — `GET /jobs/{id}` status API p99 ≤ 100ms.
 - **NFR-05** — Job submission (`POST /jobs`) p99 ≤ 200ms.
 
 ### Throughput
+
 - **NFR-06** — The system shall process 1,000,000 jobs per day at normal load.
 - **NFR-07** — The system shall support 100 concurrent worker instances without contention
   on job claiming.
 
 ### Durability
+
 - **NFR-08** — Zero tolerance for job loss. Every job that receives a successful creation
   response must either be eventually processed to completion or moved to the dead letter
   queue. Silent job drops are not acceptable.
 
 ### Consistency
+
 - **NFR-09** — Job status reads are strongly consistent — a status query immediately after
   a state change reflects the new state.
 - **NFR-10** — At most one worker processes a given job at any point in time. Duplicate
   execution of a single job attempt is not permitted.
 
 ### Idempotency
+
 - **NFR-11** — Job handlers are expected to be idempotent at the application level. The
   queue guarantees at-least-once execution (a worker crash may cause re-execution from
   the beginning). Exactly-once processing is the responsibility of the job handler.
 
 ---
 
-## Estimated Traffic
+## Estimated Traffic.
 
-| Metric                              | Estimate                      |
-|-------------------------------------|-------------------------------|
-| Jobs submitted per day              | 1,000,000                     |
-| Average jobs per second             | ~12                           |
-| Peak burst rate                     | ~100 jobs/second              |
-| Concurrent worker instances         | 100                           |
-| Heartbeat writes per second         | ~3 (100 workers × 1/30s)     |
-| Job result rows stored per day      | 1,000,000                     |
-| Average job execution time          | 5–30 seconds (job type varies) |
-| Dead letter jobs per day (est. 0.1%)| ~1,000                        |
+| Metric                               | Estimate                       |
+| ------------------------------------ | ------------------------------ |
+| Jobs submitted per day               | 1,000,000                      |
+| Average jobs per second              | ~12                            |
+| Peak burst rate                      | ~100 jobs/second               |
+| Concurrent worker instances          | 100                            |
+| Heartbeat writes per second          | ~3 (100 workers × 1/30s)       |
+| Job result rows stored per day       | 1,000,000                      |
+| Average job execution time           | 5–30 seconds (job type varies) |
+| Dead letter jobs per day (est. 0.1%) | ~1,000                         |
 
 ---
 
