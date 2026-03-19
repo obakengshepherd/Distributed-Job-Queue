@@ -1,6 +1,26 @@
 using DistributedJobQueue.Infrastructure.Cache;
 using DistributedJobQueue.Infrastructure.Messaging;
 using DistributedJobQueue.Infrastructure.Persistence;
+using Shared.Infrastructure.RateLimit;
+using Shared.Api.Controllers;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+
+builder.Services.AddSingleton<IEnumerable<RateLimitRule>>(
+    _ => RateLimitPolicies.JobQueuePolicies());
+
+builder.Services.AddHealthChecks()
+    .AddCheck<RabbitMqHealthCheck>("rabbitmq", failureStatus: HealthStatus.Degraded,  tags: ["messaging"])
+    .AddCheck<PostgreSqlHealthCheck>("postgresql", failureStatus: HealthStatus.Unhealthy, tags: ["database"]);
+
+builder.Services.AddTransient(_ => new RabbitMqHealthCheck(builder.Configuration.GetConnectionString("RabbitMQ") ?? "amqp://devuser:devpass@localhost:5672/"));
+builder.Services.AddTransient(_ => new PostgreSqlHealthCheck(builder.Configuration.GetConnectionString("PostgreSQL")!));
+
+// ── Middleware pipeline ──
+// app.UseAuthentication();
+// app.UseAuthorization();
+// app.UseMiddleware<RedisRateLimitMiddleware>();
+// app.MapControllers();
+// app.MapHealthEndpoints();
 
 // Redis
 builder.Services.AddSingleton<IConnectionMultiplexer>(_ =>
