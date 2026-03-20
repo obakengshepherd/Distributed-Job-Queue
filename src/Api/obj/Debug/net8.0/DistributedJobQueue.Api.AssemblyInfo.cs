@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DistributedJobQueue.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fc8f465d3b99ceb6e94de0ce0e0b98f8adfbec7b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5687be1dc417962d209879189478ef3ab7d469da")]
 [assembly: System.Reflection.AssemblyProductAttribute("DistributedJobQueue.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DistributedJobQueue.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
